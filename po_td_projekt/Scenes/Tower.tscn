@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://5jxekawb5l7l"]
+
+[node name="Tower" type="Area2D"]
