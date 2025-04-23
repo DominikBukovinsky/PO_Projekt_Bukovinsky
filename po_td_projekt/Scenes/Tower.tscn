@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://5jxekawb5l7l"]
+[gd_scene load_steps=3 format=3 uid="uid://5jxekawb5l7l"]
+
+[ext_resource type="Texture2D" uid="uid://8vic5j2vsafw" path="res://icon.svg" id="1_ry8d0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4yjk7"]
+radius = 100.0
 
 [node name="Tower" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ry8d0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4yjk7")
+
+[node name="Timer" type="Timer" parent="."]
