@@ -1,1 +1,7 @@
+res://Scenes/MainScene.tscn
 res://Scenes/Tower.tscn
+res://Scenes/Enemy.tscn
+res://Scripts/Enemy.cs
+res://Scripts/Tower.cs
+res://Scenes/Projectile.tscn
+res://Scripts/Projectile.cs

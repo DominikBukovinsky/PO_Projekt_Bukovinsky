@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://5jxekawb5l7l"]
+[gd_scene load_steps=5 format=3 uid="uid://5jxekawb5l7l"]
 
+[ext_resource type="Script" uid="uid://dfv7t78axi24" path="res://Scripts/Tower.cs" id="1_4yjk7"]
 [ext_resource type="Texture2D" uid="uid://8vic5j2vsafw" path="res://icon.svg" id="1_ry8d0"]
+[ext_resource type="PackedScene" uid="uid://bb08kyop7i0ou" path="res://Scenes/Projectile.tscn" id="2_tpt2e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4yjk7"]
-radius = 100.0
+radius = 320.11
 
 [node name="Tower" type="Area2D"]
+script = ExtResource("1_4yjk7")
+_projectileScene = ExtResource("2_tpt2e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ry8d0")
@@ -14,3 +18,5 @@ texture = ExtResource("1_ry8d0")
 shape = SubResource("CircleShape2D_4yjk7")
 
 [node name="Timer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
