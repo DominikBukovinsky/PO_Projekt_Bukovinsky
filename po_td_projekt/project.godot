@@ -12,8 +12,12 @@ config_version=5
 
 config/name="PO_TD_Projekt"
 run/main_scene="uid://btj5nqmap037o"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://Scripts/GameManager.cs"
 
 [dotnet]
 
