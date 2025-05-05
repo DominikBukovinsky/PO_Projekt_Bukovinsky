@@ -1,8 +1,0 @@
-res://Scenes/Enemy.tscn
-res://Scripts/Enemy.cs
-res://Scenes/MainScene.tscn
-res://Scenes/Tower.tscn
-res://Scenes/EnemyPath.tscn
-res://Scripts/GameManager.cs
-res://Scripts/Projectile.cs
-res://Scripts/Tower.cs
