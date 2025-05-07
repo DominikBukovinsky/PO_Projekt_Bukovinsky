@@ -1,11 +1,9 @@
-[gd_scene load_steps=45 format=3 uid="uid://7abr8cv03w62"]
+[gd_scene load_steps=42 format=3 uid="uid://7abr8cv03w62"]
 
 [ext_resource type="Script" uid="uid://bjeu47nj2spma" path="res://Scripts/player.gd" id="1_ikcpc"]
 [ext_resource type="Texture2D" uid="uid://8nlfl8v21vu5" path="res://Assets/Player-rpg.png" id="2_5erdv"]
-[ext_resource type="Script" uid="uid://c1e7fappvsxh4" path="res://Scripts/enemy.gd" id="3_qbrl8"]
-[ext_resource type="Texture2D" uid="uid://bi0fcbcvqk1xl" path="res://icon.svg" id="4_a2ia3"]
+[ext_resource type="PackedScene" uid="uid://jmivqglk4dgg" path="res://Scenes/enemy.tscn" id="3_a2ia3"]
 [ext_resource type="Script" uid="uid://bnpcywd312n3w" path="res://Scripts/spawner.gd" id="5_a2ia3"]
-[ext_resource type="Script" uid="uid://dpnux5tw80yth" path="res://Scripts/tower.gd" id="6_236hc"]
 
 [sub_resource type="Animation" id="Animation_qbrl8"]
 resource_name = "Attack"
@@ -181,6 +179,9 @@ size = Vector2(15, 7)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tqiex"]
 size = Vector2(66, 56)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5erdv"]
+size = Vector2(66, 56)
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_qbrl8"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tqiex"]
@@ -284,11 +285,6 @@ states/Walk/node = SubResource("AnimationNodeBlendSpace2D_tqiex")
 states/Walk/position = Vector2(525, 144)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_unus1"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_and0o"), "Idle", "Sword", SubResource("AnimationNodeStateMachineTransition_jf8f8"), "Sword", "Idle", SubResource("AnimationNodeStateMachineTransition_qx7ya"), "Walk", "Sword", SubResource("AnimationNodeStateMachineTransition_d4dc6"), "Sword", "Walk", SubResource("AnimationNodeStateMachineTransition_7wxy1"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_8ce4n"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_o0i6v"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_1ubp3"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_oi0bv"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ikcpc")]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_236hc"]
-size = Vector2(16, 16)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_236hc"]
-
 [node name="main_level" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
@@ -312,12 +308,23 @@ disabled = true
 
 [node name="Sword" type="Area2D" parent="Player"]
 position = Vector2(17, 0)
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Sword"]
 position = Vector2(-17, 0)
 shape = SubResource("RectangleShape2D_tqiex")
 disabled = true
 debug_color = Color(0.84059, 0.340525, 0.464656, 0.42)
+
+[node name="Area2D" type="Area2D" parent="Player/Sword"]
+position = Vector2(1, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Sword/Area2D"]
+position = Vector2(-18, 0)
+shape = SubResource("RectangleShape2D_5erdv")
 
 [node name="anim_tree" type="AnimationTree" parent="Player"]
 tree_root = SubResource("AnimationNodeStateMachine_ikcpc")
@@ -330,43 +337,12 @@ parameters/Walk/blend_position = Vector2(0, 0.0212766)
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 
-[node name="Enemy" type="CharacterBody2D" parent="." groups=["enemies"]]
-position = Vector2(-22, 0)
-script = ExtResource("3_qbrl8")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-position = Vector2(78, 1)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_a2ia3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(78, 2)
-shape = SubResource("RectangleShape2D_236hc")
-
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource("5_a2ia3")
+enemy_scene = ExtResource("3_a2ia3")
 
-[node name="Timer" type="Timer" parent="Spawner" groups=["player"]]
+[node name="Timer" type="Timer" parent="Spawner"]
 autostart = true
 
-[node name="Tower" type="StaticBody2D" parent="."]
-position = Vector2(-78, -3)
-script = ExtResource("6_236hc")
-
-[node name="Sprite2D" type="Sprite2D" parent="Tower"]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_a2ia3")
-
-[node name="Area2D" type="Area2D" parent="Tower"]
-position = Vector2(0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tower/Area2D"]
-position = Vector2(-1, 0)
-shape = SubResource("CircleShape2D_236hc")
-
-[node name="Timer" type="Timer" parent="Tower"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tower"]
-position = Vector2(-1, 0)
-shape = SubResource("CircleShape2D_236hc")
+[connection signal="body_entered" from="Player/Sword/Area2D" to="Player" method="_on_sword_hit"]
+[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

@@ -12,7 +12,6 @@ func _ready():
 
 func _on_timer_timeout():
 	spawn_enemy()
-	# Zvyš rychlost spawnování
 	spawn_interval = max(spawn_interval - spawn_speed_increase, min_spawn_interval)
 	$Timer.wait_time = spawn_interval
 	$Timer.start()
@@ -21,7 +20,6 @@ func spawn_enemy():
 	var enemy = enemy_scene.instantiate()
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
-		# Náhodná pozice kolem hráče
 		var angle = randf_range(0, 2 * PI)
 		var distance = 600
 		enemy.global_position = player.global_position + Vector2.RIGHT.rotated(angle) * distance

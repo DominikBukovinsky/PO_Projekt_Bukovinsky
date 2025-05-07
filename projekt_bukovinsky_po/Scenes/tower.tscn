@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8eluvk0aeycf"]
+
+[ext_resource type="Script" uid="uid://dpnux5tw80yth" path="res://Scripts/tower.gd" id="1_mh5eo"]
+[ext_resource type="PackedScene" uid="uid://bgvvjk4u1ax3g" path="res://Scenes/projectile.tscn" id="2_ou3m2"]
+[ext_resource type="Texture2D" uid="uid://bi0fcbcvqk1xl" path="res://icon.svg" id="2_tghyl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tghyl"]
+size = Vector2(30, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mh5eo"]
+radius = 300.0
+
+[node name="Tower" type="StaticBody2D"]
+script = ExtResource("1_mh5eo")
+projectile_scene = ExtResource("2_ou3m2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_tghyl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tghyl")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.615, 0.615)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_mh5eo")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

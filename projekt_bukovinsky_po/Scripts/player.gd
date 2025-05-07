@@ -9,7 +9,10 @@ var inputMovement = Vector2.ZERO
 var speed = 70
 
 func _ready():
+	$Sword/Area2D.set_monitoring(false) 
+	$Sword/Area2D/CollisionShape2D.disabled = true
 	$Sword/CollisionShape2D.disabled = true
+	$Sword/Area2D.connect("body_entered", _on_sword_hit)
 
 func _physics_process(delta):
 	match current_states:
@@ -17,6 +20,8 @@ func _physics_process(delta):
 			movement()
 		player_states.SWORD:
 			sword()
+	if Input.is_action_just_pressed("build_tower"):
+		build_tower()
 
 func movement():
 	inputMovement = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -40,7 +45,31 @@ func movement():
 	move_and_slide()
 
 func sword():
+	$Sword/Area2D.set_monitoring(true)
+	$Sword/Area2D/CollisionShape2D.disabled = false
+	
 	anim_state.travel("Sword")
+	await get_tree().create_timer(0.3).timeout 
+	
+	# Vypni detekci kolizí
+	$Sword/Area2D.set_monitoring(false)
+	$Sword/Area2D/CollisionShape2D.disabled = true
+	
+	current_states = player_states.MOVE
+	
+func _on_sword_hit(body):
+	print("Meč zasáhl objekt:", body.name)
+	if body.is_in_group("enemies"):
+		print("Zfasažen nepřítel:", body.name)
+		body.take_damage(1)
+	else:
+		print("Zasažen jiný objekt:", body.name)
 	
 func state_reset():
 	current_states = player_states.MOVE
+	
+func build_tower():
+	var tower_scene = preload("res://Scenes/tower.tscn")
+	var tower = tower_scene.instantiate()
+	tower.global_position = global_position
+	get_parent().add_child(tower)

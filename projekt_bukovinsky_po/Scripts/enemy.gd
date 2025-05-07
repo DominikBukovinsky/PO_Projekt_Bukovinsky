@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var speed = 50
-var health = 3
+var speed = 100
+var health = 1
 
 func _physics_process(delta):
 	var player = get_tree().get_first_node_in_group("player")
@@ -12,5 +12,6 @@ func _physics_process(delta):
 
 func take_damage(amount):
 	health -= amount
+	print("Enemy hit:", amount, " | HP remaining:", health)
 	if health <= 0:
 		queue_free()
