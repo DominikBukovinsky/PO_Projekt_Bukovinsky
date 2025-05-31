@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp1kjj62u3cje"]
+
+[ext_resource type="Script" uid="uid://dc5bsj05qmv0i" path="res://Scripts/UI.gd" id="1_w371h"]
+
+[node name="UI" type="CanvasLayer" groups=["ui"]]
+script = ExtResource("1_w371h")
+
+[node name="MoneyLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 171.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 24
+text = "\"Peníze: 0\""

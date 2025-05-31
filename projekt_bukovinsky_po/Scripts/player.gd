@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var money = 0
 @onready var anim_tree = $anim_tree
 @onready var anim_state = anim_tree.get("parameters/playback")
 enum player_states {MOVE, SWORD, JUMP, DEAD}
@@ -13,6 +14,7 @@ func _ready():
 	$Sword/Area2D/CollisionShape2D.disabled = true
 	$Sword/CollisionShape2D.disabled = true
 	$Sword/Area2D.connect("body_entered", _on_sword_hit)
+	update_ui()
 
 func _physics_process(delta):
 	match current_states:
@@ -69,7 +71,23 @@ func state_reset():
 	current_states = player_states.MOVE
 	
 func build_tower():
+	if money < 10:
+		print("Nemáš dost peněz! Potřebuješ 10.")
+		return   
 	var tower_scene = preload("res://Scenes/tower.tscn")
 	var tower = tower_scene.instantiate()
 	tower.global_position = global_position
 	get_parent().add_child(tower)
+	money -= 10
+	print("Postavena věž. Zbývá: ", money)
+	update_ui()
+	
+func add_money(amount):
+	money += amount
+	print("Peníze: ", money)
+	update_ui()
+	
+func update_ui():
+	var ui = get_tree().get_first_node_in_group("ui")
+	if ui:
+		ui.update_money(money)
