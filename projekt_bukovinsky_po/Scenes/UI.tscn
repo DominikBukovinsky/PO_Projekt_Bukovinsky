@@ -10,5 +10,18 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = 171.0
 offset_bottom = 54.0
+theme_override_colors/font_color = Color(0, 0.1837, 0.999999, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
-text = "\"Peníze: 0\""
+text = "Peníze: 0"
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 47.0
+offset_right = 144.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Životy: 100"

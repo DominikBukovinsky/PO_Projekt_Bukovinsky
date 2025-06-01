@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var health = 100
 var money = 0
 @onready var anim_tree = $anim_tree
 @onready var anim_state = anim_tree.get("parameters/playback")
@@ -53,7 +54,6 @@ func sword():
 	anim_state.travel("Sword")
 	await get_tree().create_timer(0.3).timeout 
 	
-	# Vypni detekci kolizí
 	$Sword/Area2D.set_monitoring(false)
 	$Sword/Area2D/CollisionShape2D.disabled = true
 	
@@ -91,3 +91,22 @@ func update_ui():
 	var ui = get_tree().get_first_node_in_group("ui")
 	if ui:
 		ui.update_money(money)
+		ui.update_health(health)
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("enemies"):
+		take_damage(5)
+
+func take_damage(amount):
+	health -= amount
+	health = max(health, 0)
+	print("Životy: ", health)
+	update_ui()
+	if health <= 0:
+		die()
+
+func die():
+	print("Hráč zemřel!")
+	set_physics_process(false)
+	$CollisionShape2D.disabled = true

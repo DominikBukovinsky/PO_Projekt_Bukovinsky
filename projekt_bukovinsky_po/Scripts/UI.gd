@@ -1,10 +1,13 @@
 extends CanvasLayer
 
 var money_label: Label
+var health_label: Label
 
 func _ready():
 	money_label = get_node("MoneyLabel")
-	
+	health_label = get_node("HealthLabel")
+	if not health_label:
+		health_label = find_child("HealthLabel", true, false)
 	if not money_label:
 		money_label = find_child("MoneyLabel", true, false)
 	
@@ -18,3 +21,9 @@ func update_money(value):
 		money_label.text = "Peníze: " + str(value)
 	else:
 		push_error("UI: Pokus o aktualizaci peněz, ale money_label je null")
+		
+func update_health(value):
+	if health_label:
+		health_label.text = "Životy: " + str(value)
+	else:
+		push_error("health_label je null")

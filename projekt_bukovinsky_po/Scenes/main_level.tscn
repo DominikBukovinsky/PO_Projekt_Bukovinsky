@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://7abr8cv03w62"]
+[gd_scene load_steps=44 format=3 uid="uid://7abr8cv03w62"]
 
 [ext_resource type="Script" uid="uid://bjeu47nj2spma" path="res://Scripts/player.gd" id="1_ikcpc"]
 [ext_resource type="Texture2D" uid="uid://8nlfl8v21vu5" path="res://Assets/Player-rpg.png" id="2_5erdv"]
@@ -286,6 +286,9 @@ states/Walk/node = SubResource("AnimationNodeBlendSpace2D_tqiex")
 states/Walk/position = Vector2(525, 144)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_unus1"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_and0o"), "Idle", "Sword", SubResource("AnimationNodeStateMachineTransition_jf8f8"), "Sword", "Idle", SubResource("AnimationNodeStateMachineTransition_qx7ya"), "Walk", "Sword", SubResource("AnimationNodeStateMachineTransition_d4dc6"), "Sword", "Walk", SubResource("AnimationNodeStateMachineTransition_7wxy1"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_8ce4n"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_o0i6v"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_1ubp3"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_oi0bv"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ikcpc")]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2ia3"]
+size = Vector2(30, 36)
+
 [node name="main_level" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
@@ -335,6 +338,14 @@ parameters/Jump/blend_position = Vector2(0, 0)
 parameters/Sword/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0.0212766)
 
+[node name="Area2D" type="Area2D" parent="Player"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_a2ia3")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 
@@ -348,4 +359,5 @@ autostart = true
 [node name="UI" parent="." instance=ExtResource("5_236hc")]
 
 [connection signal="body_entered" from="Player/Sword/Area2D" to="Player" method="_on_sword_hit"]
+[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

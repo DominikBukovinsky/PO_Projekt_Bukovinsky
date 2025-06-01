@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://jmivqglk4dgg"]
 
 [ext_resource type="Script" uid="uid://c1e7fappvsxh4" path="res://Scripts/enemy.gd" id="1_1f0kj"]
-[ext_resource type="Texture2D" uid="uid://bi0fcbcvqk1xl" path="res://icon.svg" id="2_afpow"]
+[ext_resource type="Texture2D" uid="uid://d2xpot8h6kucg" path="res://Assets/Biomech Dragon Splice.png" id="2_1f0kj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_236hc"]
-size = Vector2(17.3516, 18.2648)
+size = Vector2(27.3973, 27.3973)
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 2
@@ -13,10 +13,10 @@ script = ExtResource("1_1f0kj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_afpow")
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("2_1f0kj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -1)
+position = Vector2(0, -2.38419e-07)
 scale = Vector2(1.095, 1.095)
 shape = SubResource("RectangleShape2D_236hc")
