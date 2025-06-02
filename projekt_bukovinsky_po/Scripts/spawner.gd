@@ -4,7 +4,7 @@ extends Node2D
 @export var enemy_scene: PackedScene
 var spawn_interval = 2.0
 var min_spawn_interval = 0.5
-var spawn_speed_increase = 0.05
+var spawn_speed_increase = 1
 
 func _ready():
 	$Timer.wait_time = spawn_interval

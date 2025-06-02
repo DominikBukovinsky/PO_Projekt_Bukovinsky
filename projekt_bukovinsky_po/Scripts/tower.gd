@@ -5,8 +5,8 @@ extends StaticBody2D
 @export var projectile_scene: PackedScene
 @onready var timer = $Timer
 
-var attack_range = 150
-var attack_speed = 0.75
+var attack_range = 125
+var attack_speed = 0.5
 
 func _ready():
 	add_to_group("towers")

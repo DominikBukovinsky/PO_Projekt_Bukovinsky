@@ -11,14 +11,14 @@ offset_top = 8.0
 offset_right = 209.0
 offset_bottom = 149.0
 pivot_offset = Vector2(39, 38)
-color = Color(0, 0, 0, 0.105882)
+color = Color(0, 0, 0, 0.631373)
 
 [node name="MoneyLabel" type="Label" parent="."]
 offset_left = 20.0
 offset_top = 60.0
 offset_right = 171.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0, 0.1837, 0.999999, 1)
+theme_override_colors/font_color = Color(0.26188, 0.479034, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
