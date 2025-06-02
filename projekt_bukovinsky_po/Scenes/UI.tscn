@@ -5,11 +5,19 @@
 [node name="UI" type="CanvasLayer" groups=["ui"]]
 script = ExtResource("1_w371h")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 3.0
+offset_top = 8.0
+offset_right = 209.0
+offset_bottom = 149.0
+pivot_offset = Vector2(39, 38)
+color = Color(0, 0, 0, 0.105882)
+
 [node name="MoneyLabel" type="Label" parent="."]
 offset_left = 20.0
-offset_top = 20.0
+offset_top = 60.0
 offset_right = 171.0
-offset_bottom = 54.0
+offset_bottom = 94.0
 theme_override_colors/font_color = Color(0, 0.1837, 0.999999, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
@@ -18,10 +26,19 @@ text = "Peníze: 0"
 
 [node name="HealthLabel" type="Label" parent="."]
 offset_left = 20.0
-offset_top = 47.0
+offset_top = 21.0
 offset_right = 144.0
-offset_bottom = 81.0
+offset_bottom = 55.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "Životy: 100"
+
+[node name="TowerCounter" type="Label" parent="."]
+offset_left = 21.0
+offset_top = 100.0
+offset_right = 219.0
+offset_bottom = 135.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Placeholder"

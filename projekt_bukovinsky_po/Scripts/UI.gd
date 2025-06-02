@@ -27,3 +27,6 @@ func update_health(value):
 		health_label.text = "Životy: " + str(value)
 	else:
 		push_error("HealthLabel je null")
+		
+func update_towers(current, max):
+	$TowerCounter.text = "Věže: %s / %s" %[current, max]

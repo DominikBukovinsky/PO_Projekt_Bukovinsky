@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+
+var current_towers = 0
+var max_towers = 4
 var health = 100
 var money = 0
 @onready var anim_tree = $anim_tree
@@ -62,7 +65,7 @@ func sword():
 func _on_sword_hit(body):
 	print("Meč zasáhl objekt:", body.name)
 	if body.is_in_group("enemies"):
-		print("Zfasažen nepřítel:", body.name)
+		print("Zasažen nepřítel:", body.name)
 		body.take_damage(1)
 	else:
 		print("Zasažen jiný objekt:", body.name)
@@ -71,15 +74,26 @@ func state_reset():
 	current_states = player_states.MOVE
 	
 func build_tower():
+	
+	if current_towers >= max_towers:
+		print("Maximální počet věží dosažen")
+		return
+		
 	if money < 10:
 		print("Nemáš dost peněz! Potřebuješ 10.")
 		return   
+	var existing_towers = get_tree().get_nodes_in_group("towers")
+	for tower in existing_towers:
+		if tower.global_position.distance_to(global_position) < tower.min_radius:
+			print("Věže moc blízko")
+			return
 	var tower_scene = preload("res://Scenes/tower.tscn")
 	var tower = tower_scene.instantiate()
 	tower.global_position = global_position
 	get_parent().add_child(tower)
 	money -= 10
-	print("Postavena věž. Zbývá: ", money)
+	current_towers += 1
+	print("Postavena věž. Zbývá: ", money, " peněz")
 	update_ui()
 	
 func add_money(amount):
@@ -92,6 +106,7 @@ func update_ui():
 	if ui:
 		ui.update_money(money)
 		ui.update_health(health)
+		ui.update_towers(current_towers, max_towers)
 
 
 func _on_area_2d_body_entered(body):
@@ -101,7 +116,6 @@ func _on_area_2d_body_entered(body):
 func take_damage(amount):
 	health -= amount
 	health = max(health, 0)
-	print("Životy: ", health)
 	update_ui()
 	if health <= 0:
 		die()

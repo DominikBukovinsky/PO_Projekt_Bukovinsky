@@ -1,14 +1,15 @@
 # Tower.gd
 extends StaticBody2D
 
+@export var min_radius = 25
 @export var projectile_scene: PackedScene
 @onready var timer = $Timer
 
 var attack_range = 150
-var attack_speed = 1.0
+var attack_speed = 0.75
 
 func _ready():
-	print("Věž inicializována. Timer existuje?", timer != null)
+	add_to_group("towers")
 	timer.wait_time = attack_speed
 	timer.start()
 	$Area2D/CollisionShape2D.shape.radius = attack_range
@@ -16,13 +17,9 @@ func _ready():
 	
 
 func _on_timer_timeout():
-	print("Timer aktivován!")
 	var target = find_closest_enemy()
 	if target:
-		print("Cíl nalezen: ", target.name)
 		shoot(target)
-	else:
-		print("Žádný cíl v dosahu.")
 
 func find_closest_enemy():
 	var closest = null
