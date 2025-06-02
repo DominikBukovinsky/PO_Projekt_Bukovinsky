@@ -110,3 +110,10 @@ func die():
 	print("Hráč zemřel!")
 	set_physics_process(false)
 	$CollisionShape2D.disabled = true
+	show_death_screen()
+		
+func show_death_screen():
+	var ui = get_tree().get_first_node_in_group("ui")
+	if ui:
+		ui.hide()
+	get_tree().change_scene_to_file("res://Scenes/DeathScreen.tscn")

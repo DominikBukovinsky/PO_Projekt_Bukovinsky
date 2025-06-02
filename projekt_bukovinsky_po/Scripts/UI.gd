@@ -20,10 +20,10 @@ func update_money(value):
 	if money_label:
 		money_label.text = "Peníze: " + str(value)
 	else:
-		push_error("UI: Pokus o aktualizaci peněz, ale money_label je null")
+		push_error("UI: MoneyLabel je null")
 		
 func update_health(value):
 	if health_label:
 		health_label.text = "Životy: " + str(value)
 	else:
-		push_error("health_label je null")
+		push_error("HealthLabel je null")

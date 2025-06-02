@@ -10,7 +10,7 @@ var attack_speed = 1.0
 func _ready():
 	print("Věž inicializována. Timer existuje?", timer != null)
 	timer.wait_time = attack_speed
-	timer.start()  # Spustí Timer
+	timer.start()
 	$Area2D/CollisionShape2D.shape.radius = attack_range
 	
 	

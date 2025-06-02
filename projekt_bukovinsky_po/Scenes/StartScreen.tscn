@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://8pfe5j6q5emf"]
+
+[ext_resource type="Script" uid="uid://ca2fs2tnn3b4j" path="res://Scripts/start_screen.gd" id="1_ko4ly"]
+
+[node name="StartScreen" type="CanvasLayer"]
+script = ExtResource("1_ko4ly")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1147.0
+offset_bottom = 648.0
+color = Color(0.301105, 3.51956e-07, 9.62615e-08, 1)
+
+[node name="GameName" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.5
+offset_top = 144.0
+offset_right = 102.5
+offset_bottom = 218.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Biomech Dragon Survivors"
+
+[node name="StartGame" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.5
+offset_top = -52.5
+offset_right = 86.5
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "SPUSTIT HRU"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 491.0
+offset_top = 417.0
+offset_right = 662.0
+offset_bottom = 520.0
+theme_override_font_sizes/font_size = 24
+text = "UKONČIT HRU"
+
+[connection signal="pressed" from="StartGame" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_quit_game"]

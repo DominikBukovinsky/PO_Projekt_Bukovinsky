@@ -15,7 +15,6 @@ script = ExtResource("1_mh5eo")
 projectile_scene = ExtResource("2_ou3m2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_tghyl")
 hframes = 14

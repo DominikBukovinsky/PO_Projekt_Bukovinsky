@@ -289,7 +289,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2ia3"]
 size = Vector2(30, 36)
 
-[node name="main_level" type="Node2D"]
+[node name="main_level" type="Node2D" groups=["main"]]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 script = ExtResource("1_ikcpc")
